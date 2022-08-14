@@ -29,5 +29,15 @@
             <artifactId>chat-room-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>chat-room-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.13.4</version>
+        </dependency>
     </dependencies>
 </project>
