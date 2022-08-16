@@ -1,4 +1,4 @@
-package org.example.chat.room.domain.message.req;
+package org.example.chat.room.api.domain.message.req;
 
 import lombok.Data;
 

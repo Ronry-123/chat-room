@@ -8,10 +8,13 @@ create table `user`(
     `username` varchar(255) DEFAULT NULL COMMENT '用户名',
     `nickname` varchar(255) DEFAULT NULL COMMENT '用户名',
     `avatar` varchar(255) DEFAULT NULL COMMENT '用户头像',
-    `delete_uid` bigint(20) unsigned DEFAULT NULL COMMENT '删除id',
-    unique key `uni_uid_delete` (`uid`, `delete_uid`),
+    `is_delete` tinyint(1) unsigned default 0 COMMENT '是否删除',
+    unique key `uni_uid_delete` (`email`, `is_delete`),
+    index key `idx_email`(`email`),
     primary key (`id`)
 )ENGINE=InnoDB  comment 'user';
+
+
 
 create table `room`(
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
@@ -51,3 +54,4 @@ create table `room_message`(
     unique index `uni_room_seq_id`(`room_id`, `sequence_id`),
     primary key (`id`)
 )ENGINE=InnoDB  comment 'room';
+

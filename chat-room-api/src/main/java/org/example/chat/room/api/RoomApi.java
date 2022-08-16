@@ -1,14 +1,13 @@
-package org.example.chat.room;
+package org.example.chat.room.api;
 
 import com.tove.web.infra.common.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.sf.jsqlparser.statement.select.Join;
-import org.example.chat.room.domain.room.RoomVo;
-import org.example.chat.room.domain.room.req.CreateRoomReq;
-import org.example.chat.room.domain.room.req.DestroyRoomReq;
-import org.example.chat.room.domain.room.req.JoinRoomReq;
-import org.example.chat.room.domain.room.req.LeaveRoomReq;
+import org.example.chat.room.api.domain.room.RoomVo;
+import org.example.chat.room.api.domain.room.req.CreateRoomReq;
+import org.example.chat.room.api.domain.room.req.DestroyRoomReq;
+import org.example.chat.room.api.domain.room.req.JoinRoomReq;
+import org.example.chat.room.api.domain.room.req.LeaveRoomReq;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;

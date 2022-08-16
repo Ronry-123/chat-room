@@ -1,4 +1,4 @@
-package org.example.chat.room.domain.user.req;
+package org.example.chat.room.api.domain.user.req;
 
 
 import io.swagger.annotations.ApiModel;

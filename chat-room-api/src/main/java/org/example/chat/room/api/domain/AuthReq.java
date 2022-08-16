@@ -1,4 +1,4 @@
-package org.example.chat.room.domain;
+package org.example.chat.room.api.domain;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

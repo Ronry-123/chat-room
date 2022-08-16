@@ -15,7 +15,7 @@
     <module>chat-room-rest</module>
     <module>chat-room-ws</module>
     <module>chat-room-common</module>
-      <module>chat-room-dao</module>
+    <module>chat-room-dao</module>
   </modules>
   <packaging>pom</packaging>
 

@@ -1,4 +1,4 @@
-package org.example.chat.room.domain.room;
+package org.example.chat.room.api.domain.room;
 
 import lombok.Data;
 

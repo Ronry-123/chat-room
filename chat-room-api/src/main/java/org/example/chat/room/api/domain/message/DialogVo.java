@@ -1,4 +1,4 @@
-package org.example.chat.room.domain.message;
+package org.example.chat.room.api.domain.message;
 
 import lombok.Data;
 import java.util.Date;
