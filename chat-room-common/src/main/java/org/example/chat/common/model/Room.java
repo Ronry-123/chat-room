@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class Room extends BaseModel {
-    private Long roomId;
+    private String roomId;
     /**
      * 房间名称(friend， group， channel)
      */

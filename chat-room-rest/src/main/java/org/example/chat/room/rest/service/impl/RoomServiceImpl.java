@@ -1,4 +1,4 @@
-package org.example.chat.room.service.impl;
+package org.example.chat.room.rest.service.impl;
 
 import com.tove.web.infra.common.BaseException;
 import org.example.chat.common.model.Room;
@@ -9,7 +9,7 @@ import org.example.chat.room.api.domain.room.req.DestroyRoomReq;
 import org.example.chat.room.api.domain.room.req.JoinRoomReq;
 import org.example.chat.room.api.domain.room.req.LeaveRoomReq;
 import org.example.chat.room.dao.RoomMapper;
-import org.example.chat.room.service.RoomService;
+import org.example.chat.room.rest.service.RoomService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

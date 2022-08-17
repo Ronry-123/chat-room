@@ -1,4 +1,4 @@
-package org.example.chat.room.service;
+package org.example.chat.room.rest.service;
 
 import com.tove.web.infra.common.Response;
 import org.example.chat.room.api.domain.room.RoomVo;

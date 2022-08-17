@@ -1,4 +1,4 @@
-package org.example.chat.room.service.impl;
+package org.example.chat.room.rest.service.impl;
 
 import com.tove.web.infra.common.BaseException;
 import com.tove.web.infra.common.tool.Md5Tools;
@@ -10,8 +10,8 @@ import org.example.chat.room.dao.UserMapper;
 import org.example.chat.room.api.domain.user.UserVo;
 import org.example.chat.room.api.domain.user.req.UserLoginReq;
 import org.example.chat.room.api.domain.user.req.UserSignReq;
-import org.example.chat.room.service.ChatUserService;
-import org.example.chat.room.service.CoreRedisService;
+import org.example.chat.room.rest.service.ChatUserService;
+import org.example.chat.room.rest.service.CoreRedisService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;

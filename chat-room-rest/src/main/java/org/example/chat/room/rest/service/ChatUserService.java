@@ -1,4 +1,4 @@
-package org.example.chat.room.service;
+package org.example.chat.room.rest.service;
 
 import org.example.chat.room.api.domain.user.UserVo;
 import org.example.chat.room.api.domain.user.req.UserLoginReq;

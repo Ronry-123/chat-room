@@ -1,4 +1,4 @@
-package org.example.chat.room.config;
+package org.example.chat.room.rest.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

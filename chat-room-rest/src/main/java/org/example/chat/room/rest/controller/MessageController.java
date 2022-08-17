@@ -1,4 +1,4 @@
-package org.example.chat.room.controller;
+package org.example.chat.room.rest.controller;
 
 import com.tove.web.infra.common.Response;
 import org.example.chat.room.api.MessageApi;

@@ -1,4 +1,4 @@
-package org.example.chat.room.controller;
+package org.example.chat.room.rest.controller;
 
 import com.tove.web.infra.common.Response;
 import org.example.chat.room.api.RoomApi;
@@ -7,7 +7,7 @@ import org.example.chat.room.api.domain.room.req.CreateRoomReq;
 import org.example.chat.room.api.domain.room.req.DestroyRoomReq;
 import org.example.chat.room.api.domain.room.req.JoinRoomReq;
 import org.example.chat.room.api.domain.room.req.LeaveRoomReq;
-import org.example.chat.room.service.RoomService;
+import org.example.chat.room.rest.service.RoomService;
 import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.RestController;
 
