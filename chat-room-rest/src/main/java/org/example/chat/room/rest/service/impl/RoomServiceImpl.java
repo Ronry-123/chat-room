@@ -23,6 +23,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public RoomVo createRoom(CreateRoomReq req) {
+        // 往群里面存入一个用户
         return null;
     }
 

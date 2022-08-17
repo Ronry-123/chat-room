@@ -36,6 +36,7 @@ public class WebSocketUtils {
                 return;
             }
             userSessions.add(session);
+            ONLINE_USER_SESSIONS_MAP.put(uid, userSessions);
             USER_MAP.put(uid, userInfo);
             SESSION_ID_USER_MAP.put(sessionId, new UserConnect(uid));
         }

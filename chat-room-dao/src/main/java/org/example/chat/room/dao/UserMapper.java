@@ -4,15 +4,16 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.example.chat.common.model.User;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-
 @Mapper
 public interface UserMapper {
 
-    @Insert("INSERT INTO user (user_id, user_name, user_pwd, user_email, user_phone, user_status, user_create_time, user_update_time) " +
-            "VALUES (#{userId}, #{userName}, #{userPwd}, #{userEmail}, #{userPhone}, #{userStatus}, #{userCreateTime}, #{userUpdateTime})")
+    @Select("select 1 from user where email = #{email}")
+    Integer existUserByEmail(String email);
+
+    @Insert("INSERT INTO user (chat_uid, username, email, password, nickname, avatar) " +
+            "VALUES (#{chatUid}, #{username}, #{email}, #{password}, #{nickname}, #{avatar})")
     int insert(User user);
 
-    @Select("SELECT * FROM user WHERE user_email = #{userEmail}")
+    @Select("select id, chat_uid, username, email, password, nickname, avatar FROM user WHERE email = #{email}")
     User selectByEmail(String email);
 }

@@ -19,21 +19,32 @@ import javax.websocket.server.ServerEndpoint;
 @Component
 public class ChatRoomRouter {
 
-    @Resource
-    private MessageService messageService;
+
+    private static MessageService messageService;
+
+
+    private static RedisService redisService;
 
     @Resource
-    private RedisService redisService;
+    public void setRedisService(RedisService redisService) {
+        ChatRoomRouter.redisService = redisService;
+    }
+
+    @Resource
+    private void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
+    }
 
     @OnOpen
     public void onOpen(Session session, @PathParam("token") String token) {
-        if (StringUtils.hasLength(token)){
+        if (!StringUtils.hasLength(token)){
             log.error("token not null");
         }
         UserInfo userInfo = redisService.getUserInfo(token);
         if (userInfo == null){
             log.error("token not null");
         }
+        userInfo.setChatUid(5557241151L);
         WebSocketUtils.SessionManager.addSession(session, userInfo);
     }
 
@@ -54,7 +65,8 @@ public class ChatRoomRouter {
             return;
         }
         if("ping".equals(message.toLowerCase())) {
-            WebSocketUtils.sendMessage(session, "pong");;
+            WebSocketUtils.sendMessage(session, "pong");
+            // 记录连接最后活跃的时间
             return;
         }
         System.out.println("receive message: " + message);
