@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class RoomMember extends BaseModel {
-    private Long roomId;
+    private String roomId;
     private Long chatUid;
-    private boolean isAdmin;
+    private Boolean admin;
 }

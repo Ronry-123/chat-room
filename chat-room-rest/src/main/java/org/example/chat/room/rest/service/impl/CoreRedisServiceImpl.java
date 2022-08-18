@@ -9,6 +9,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class CoreRedisServiceImpl implements CoreRedisService {
@@ -19,6 +20,6 @@ public class CoreRedisServiceImpl implements CoreRedisService {
     @Override
     public void setUserInfo(String token, UserInfo userInfo) {
         RBucket<String> bucket = redissonClient.getBucket(String.format(RedisConstant.TOKEN_USER, token));
-        bucket.set(JSON.toJSONString(userInfo));
+        bucket.set(JSON.toJSONString(userInfo), 10, TimeUnit.MINUTES);
     }
 }

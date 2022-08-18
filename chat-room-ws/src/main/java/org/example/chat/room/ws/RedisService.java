@@ -20,7 +20,8 @@ public class RedisService {
 
     public UserInfo getUserInfo(String token) {
         RBucket<String> rBucket = redissonClient.getBucket(String.format(RedisConstant.TOKEN_USER, token));
-        return JSON.parseObject(rBucket.get(), UserInfo.class);
+        UserInfo userInfo = JSON.parseObject(rBucket.get(), UserInfo.class);
+        return userInfo;
     }
 
     public List<Long> getRoomUidList(Long roomId) {

@@ -65,7 +65,7 @@ public class ChatUserServiceImpl implements ChatUserService {
             throw new BaseException(RoomErrorCode.PASSWORD_ERROR);
         }
         UserVo result = new UserVo();
-        result.setChatUid(8028479748L);
+        result.setChatUid(user.getChatUid());
         result.setAvatar(user.getAvatar());
         result.setEmail(user.getEmail());
         result.setWsToken(getWsToken(user));
