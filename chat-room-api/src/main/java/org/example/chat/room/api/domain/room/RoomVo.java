@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class RoomVo {
-    private Long roomId;
+    private String roomId;
     private String name;
     private int type;
     private Integer maxNum;

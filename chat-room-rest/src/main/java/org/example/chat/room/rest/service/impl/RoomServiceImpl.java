@@ -33,6 +33,7 @@ public class RoomServiceImpl implements RoomService {
     @Resource
     private CoreRedisService coreRedisService;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public RoomVo createRoom(CreateRoomReq req) {
         // 往群里面存入一个用户
@@ -44,6 +45,7 @@ public class RoomServiceImpl implements RoomService {
         room.setCanSearch(req.getCanSearch());
         room.setMaxNum(500);
         room.setCurrNum(1);
+        room.setOwnerChatUid(req.getChatUid());
 
         // TODO check member is exist
         Set<Long> memberIds = req.getInvitedUserIds();

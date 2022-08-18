@@ -41,7 +41,8 @@ public class RoomController implements RoomApi {
 
     @Override
     public Response<Boolean> destroyRoom(DestroyRoomReq req) {
-        return null;
+        Boolean result = roomService.destroyRoom(req);
+        return Response.getOk(result);
     }
 
 }

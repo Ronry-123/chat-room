@@ -21,7 +21,7 @@ public interface RoomMapper {
     @Delete("delete from room_member where room_id = #{roomId}")
     int deleteRoomAllMember(String roomId);
 
-    @Insert("insert into room(room_id, name, type, max_num, curr_num, owner_chat_uid, can_search) " +
+    @Insert("insert into room(room_id, `name`, `type`, max_num, curr_num, owner_chat_uid, can_search) " +
             "values(#{roomId}, #{name}, #{type}, #{maxNum}, #{currNum}, #{ownerChatUid}, #{canSearch})")
     int insertRoom(Room room);
 

@@ -68,6 +68,8 @@ public class ChatUserServiceImpl implements ChatUserService {
         result.setChatUid(user.getChatUid());
         result.setAvatar(user.getAvatar());
         result.setEmail(user.getEmail());
+        result.setUsername(user.getUsername());
+        result.setNickname(user.getNickname());
         result.setWsToken(getWsToken(user));
         return result;
     }
