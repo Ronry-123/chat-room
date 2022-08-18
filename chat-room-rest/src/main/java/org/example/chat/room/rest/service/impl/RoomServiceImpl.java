@@ -12,8 +12,10 @@ import org.example.chat.room.api.domain.room.req.DestroyRoomReq;
 import org.example.chat.room.api.domain.room.req.JoinRoomReq;
 import org.example.chat.room.api.domain.room.req.LeaveRoomReq;
 import org.example.chat.room.dao.RoomMapper;
+import org.example.chat.room.rest.service.CoreRedisService;
 import org.example.chat.room.rest.service.RoomService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +29,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Resource
     private RoomMapper roomMapper;
+
+    @Resource
+    private CoreRedisService coreRedisService;
 
     @Override
     public RoomVo createRoom(CreateRoomReq req) {
@@ -60,7 +65,7 @@ public class RoomServiceImpl implements RoomService {
         } catch (Exception e) {
             throw new BaseException(RoomErrorCode.EXIST_ROOM);
         }
-
+        coreRedisService.setRoomMember(roomId.toString(), memberIds);
         RoomVo result = new RoomVo();
         BeanUtils.copyProperties(room, result);
         return result;
@@ -72,11 +77,31 @@ public class RoomServiceImpl implements RoomService {
         if (Objects.isNull(room)) {
             throw new BaseException(RoomErrorCode.NOT_EXIST_ROOM);
         }
-        return null;
+        if(!room.isCanSearch()){
+            throw new BaseException(RoomErrorCode.NOT_EXIST_ROOM);
+        }
+        if (room.getType() == RoomType.FRIEND.getCode()) {
+            throw new BaseException(RoomErrorCode.NOT_EXIST_ROOM);
+        }
+        if (room.getCurrNum() >= room.getMaxNum()) {
+            throw new BaseException(RoomErrorCode.ROOM_FULL);
+        }
+        RoomMember member = new RoomMember();
+        member.setRoomId(req.getRoomId());
+        member.setChatUid(req.getChatUid());
+        member.setAdmin(false);
+        try{
+            int rows = roomMapper.insertRoomMember(member);
+            coreRedisService.addRoomMember(req.getRoomId(), req.getChatUid());
+            return rows > 0;
+        }catch (DuplicateKeyException e){
+            throw new BaseException(RoomErrorCode.EXIST_ROOM_MEMBER);
+        }
     }
 
     @Override
     public Boolean leaveRoom(LeaveRoomReq req) {
+
         return null;
     }
 
@@ -94,7 +119,8 @@ public class RoomServiceImpl implements RoomService {
         // remove group
         roomMapper.deleteRoom(req.getRoomId());
         // remove group member
-        roomMapper.deleteRoomMember(req.getRoomId());
+        roomMapper.deleteRoomAllMember(req.getRoomId());
+        coreRedisService.removeAllRoomMember(req.getRoomId());
         return true;
     }
 

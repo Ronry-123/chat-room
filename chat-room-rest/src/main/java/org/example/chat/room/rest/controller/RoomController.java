@@ -30,7 +30,8 @@ public class RoomController implements RoomApi {
 
     @Override
     public Response<Boolean> joinRoom(JoinRoomReq req) {
-        return null;
+        Boolean result = roomService.joinRoom(req);
+        return Response.getOk(result);
     }
 
     @Override

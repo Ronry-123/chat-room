@@ -13,13 +13,13 @@ import java.util.Set;
 public interface RoomMapper {
 
     @Select("select * from room where room_id = #{roomId}")
-    Room getRoom(Long roomId);
+    Room getRoom(String roomId);
 
     @Delete("delete from room where room_id = #{roomId}")
-    int deleteRoom(Long roomId);
+    int deleteRoom(String roomId);
 
     @Delete("delete from room_member where room_id = #{roomId}")
-    int deleteRoomMember(Long roomId);
+    int deleteRoomAllMember(String roomId);
 
     @Insert("insert into room(room_id, name, type, max_num, curr_num, owner_chat_uid, can_search) " +
             "values(#{roomId}, #{name}, #{type}, #{maxNum}, #{currNum}, #{ownerChatUid}, #{canSearch})")
@@ -32,4 +32,7 @@ public interface RoomMapper {
             "</foreach>" +
             "</script>")
     int batchInsertRoomMember(Set<RoomMember> roomMembers);
+
+    @Insert("insert into room_member(room_id, chat_uid, admin) values(#{roomId}, #{chatUid}, #{admin})")
+    int insertRoomMember(RoomMember member);
 }

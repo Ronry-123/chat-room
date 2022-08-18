@@ -5,5 +5,5 @@ import org.example.chat.room.api.domain.AuthReq;
 
 @Data
 public class DestroyRoomReq extends AuthReq {
-    private Long roomId;
+    private String roomId;
 }
