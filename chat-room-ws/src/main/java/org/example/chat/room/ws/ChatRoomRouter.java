@@ -1,5 +1,8 @@
 package org.example.chat.room.ws;
 
+import com.lmax.disruptor.YieldingWaitStrategy;
+import com.lmax.disruptor.dsl.Disruptor;
+import com.lmax.disruptor.dsl.ProducerType;
 import com.tove.web.infra.common.BaseErrorCode;
 import com.tove.web.infra.common.BaseException;
 import com.tove.web.infra.common.WsResponse;
@@ -13,17 +16,18 @@ import javax.annotation.Resource;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Slf4j
 @ServerEndpoint(value = "/chat-room/{token}")
 @Component
 public class ChatRoomRouter {
-
-
     private static MessageService messageService;
 
-
     private static RedisService redisService;
+
+    private ExecutorService executors = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     @Resource
     public void setRedisService(RedisService redisService) {
@@ -73,7 +77,9 @@ public class ChatRoomRouter {
         try {
             WsArgBase arg = WsArgBase.getMsgType(message);
             arg.setUid(WebSocketUtils.SessionManager.getUserInfo(session.getId()).getUid());
-            messageService.msgHandler(arg);
+            executors.submit(() -> {
+                messageService.msgHandler(arg);
+            });
         }catch (BaseException e){
             log.warn("error: {}", e.getMsg());
             WebSocketUtils.sendMessage(session, WsResponse.getFail(e));
