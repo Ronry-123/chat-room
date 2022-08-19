@@ -145,7 +145,11 @@ public class WebSocketUtils {
     }
 
     public static void sendMessage(Long uid, WsResponse response) {
-        SessionManager.getSession(uid).forEach(session -> sendMessage(session, response));
+        List<Session> sessions = SessionManager.getSession(uid);
+        if (sessions == null || sessions.isEmpty()){
+            return;
+        }
+        sessions.forEach(session -> sendMessage(session, response));
     }
 
     public static void pushPong(Session session) {

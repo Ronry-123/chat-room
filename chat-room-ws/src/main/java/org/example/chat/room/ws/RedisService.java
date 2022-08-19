@@ -3,6 +3,7 @@ package org.example.chat.room.ws;
 import com.alibaba.fastjson.JSON;
 import org.example.chat.common.RedisConstant;
 import org.example.chat.common.ws.UserInfo;
+import org.redisson.api.RAtomicLong;
 import org.redisson.api.RBucket;
 import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
@@ -24,8 +25,13 @@ public class RedisService {
         return userInfo;
     }
 
-    public List<Long> getRoomUidList(Long roomId) {
+    public List<Long> getRoomUidList(String roomId) {
         RSet<Long> rSet = redissonClient.getSet(String.format(RedisConstant.ROOM_USER_SET, roomId));
         return rSet.readAll().stream().collect(Collectors.toList());
+    }
+
+    public Long getAutoIncrementId(String roomId) {
+        RAtomicLong rAtomicLong = redissonClient.getAtomicLong(String.format(RedisConstant.AUTO_INCREMENT_ID, roomId));
+        return rAtomicLong.incrementAndGet();
     }
 }

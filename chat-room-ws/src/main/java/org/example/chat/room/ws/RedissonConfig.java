@@ -2,6 +2,8 @@ package org.example.chat.room.ws;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
+import org.redisson.client.codec.Codec;
+import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +26,8 @@ public class RedissonConfig {
         config.useSingleServer()
                 .setDatabase(Integer.parseInt(redisDb))
                 .setAddress("redis://" + redisHost + ":" + redisPort);
-
+        Codec codec = new JsonJacksonCodec();
+        config.setCodec(codec);
         return Redisson.create(config);
     }
 }

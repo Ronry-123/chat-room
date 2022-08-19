@@ -36,6 +36,8 @@ public class MessageService {
 
     private void wsChatMessageHandler(WsChatMessage msg) {
         RoomType roomType = RoomType.of(msg.getRoomType());
+        Long seq = redisService.getAutoIncrementId(msg.getRoomId());
+        msg.setSequenceId(seq);
         List<Long> uids = null;
         switch (roomType){
             case FRIEND:
@@ -63,9 +65,6 @@ public class MessageService {
             case GROUP:
                 uids = redisService.getRoomUidList(msg.getRoomId());
                 for(Long uid: uids){
-                    if (uid.equals(msg.getSenderChatUid())){
-                        continue;
-                    }
                     WsResponse wsResponse = WsResponse.getOk(msg, CHAT_MESSAGE.name());
                     WebSocketUtils.sendMessage(uid, wsResponse);
                 }

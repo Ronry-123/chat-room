@@ -11,5 +11,6 @@ public interface RedisConstant {
     /** String -> token: UserInfo */
     String TOKEN_USER = "chat-room:ws-token:%s";
 
+    String AUTO_INCREMENT_ID = "chat-room:auto-inc-id:%s";
 }
 

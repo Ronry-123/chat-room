@@ -32,7 +32,7 @@ public class ChatRoomRouter {
 
     @Resource
     private void setMessageService(MessageService messageService) {
-        this.messageService = messageService;
+        ChatRoomRouter.messageService = messageService;
     }
 
     @OnOpen
@@ -44,7 +44,7 @@ public class ChatRoomRouter {
         if (userInfo == null){
             log.error("token not null");
         }
-        userInfo.setChatUid(5557241151L);
+        userInfo.setChatUid(userInfo.getChatUid());
         WebSocketUtils.SessionManager.addSession(session, userInfo);
     }
 
@@ -77,6 +77,9 @@ public class ChatRoomRouter {
         }catch (BaseException e){
             log.warn("error: {}", e.getMsg());
             WebSocketUtils.sendMessage(session, WsResponse.getFail(e));
+        }catch (Exception e){
+            log.warn("error: {}", e.getMessage());
+            WebSocketUtils.sendMessage(session, WsResponse.getFail(BaseErrorCode.SYSTEM_BUSY));
         }
     }
 

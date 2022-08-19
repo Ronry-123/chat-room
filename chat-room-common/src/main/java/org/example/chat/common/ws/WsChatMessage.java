@@ -9,7 +9,7 @@ import java.util.Date;
 public class WsChatMessage {
     private Long sequenceId;
 
-    private Long roomId;
+    private String roomId;
     private String roomType;
 
     private Long senderChatUid;
